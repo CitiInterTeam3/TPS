@@ -18,7 +18,7 @@ public class TraderController {
     TraderTransactionDao traderTransactionDao;
 
     @RequestMapping("/addTraderTrans")
-    //@ResponseBody
+    @ResponseBody
     public String saveTraderTransaction(HttpSession session,HttpServletRequest httpServletRequest){
         TraderTransaction traderTransaction=new TraderTransaction();
 
