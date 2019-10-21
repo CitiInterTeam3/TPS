@@ -12,5 +12,4 @@ public class DBUtils {
 
     @Resource
     JdbcTemplate jdbcTemplate;
-
 }
