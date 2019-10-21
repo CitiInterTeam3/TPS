@@ -33,6 +33,9 @@ public class TraderController {
         traderTransaction.setTraderId(trader.getTraderId());
         int modifyCount= traderTransactionDao.addTraderTransaction(traderTransaction);
         System.out.println(modifyCount);
-        return trader.getTraderId();
+        if(modifyCount>0)
+            return "success";
+        else
+            return "fail";
     }
 }
