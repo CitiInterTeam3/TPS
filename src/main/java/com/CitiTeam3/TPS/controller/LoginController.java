@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class HelloWorldController {
+public class LoginController {
 
     @Autowired
     TraderDao dao;

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TraderService {
+
     @Autowired
     TraderDao dao;
 
