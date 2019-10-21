@@ -1,6 +1,8 @@
 package com.CitiTeam3.TPS.controller;
 
+import com.CitiTeam3.TPS.dao.ProductDao;
 import com.CitiTeam3.TPS.dao.TraderDao;
+import com.CitiTeam3.TPS.domain.Product;
 import com.CitiTeam3.TPS.domain.Trader;
 import com.CitiTeam3.TPS.service.TraderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +20,14 @@ public class LoginController {
     @Autowired
     TraderDao dao;
     @Autowired
+    ProductDao productDao;
+    @Autowired
     TraderService service;
 
     @RequestMapping("/getTrader")
     public String hello(Model mv, HttpServletRequest request){
         String id=request.getParameter("traderId");
+        System.out.println("这是交易者信息");
         Trader trader=dao.getTraderById(id);
         if (trader==null){
             mv.addAttribute("msg","no such trader");
@@ -61,5 +66,16 @@ public class LoginController {
             return "personalHome";
         }
     }
+
+    @RequestMapping("/getProduct")
+    public String getProduct(Model mv,HttpServletRequest request)
+    {
+        String id=request.getParameter("cusipId");
+        System.out.println("this is the information of cusip");
+        Product product=productDao.getProductId(id);
+        mv.addAttribute("product",product);
+        return "product";
+    }
+}
 
 }
