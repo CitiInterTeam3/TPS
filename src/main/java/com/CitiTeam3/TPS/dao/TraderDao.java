@@ -40,6 +40,35 @@ public class TraderDao {
         return  query.size()==0?null:query.get(0);
     }
 
+    public Trader getTraderByUserName(String userName){
+        String sql="select * from trader where userName=?";
+        Object[] args=new Object[1];
+        args[0]=userName;
+        List<Trader> query = jdbcTemplate.query(sql, args, new RowMapper<Trader>() {
+            @Override
+            public Trader mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Trader trader=new Trader();
+                trader.setTraderId(rs.getString("traderId"));
+                trader.setUserName(rs.getString("userName"));
+                trader.setPsw(rs.getString("password"));
+                return trader;
+            }
+        });
+        return  query.size()==0?null:query.get(0);
+    }
 
+
+    public String getPswByUserName(String userName){
+        String sql="select password from trader where userName=?";
+        Object[] args=new Object[1];
+        args[0]=userName;
+        List<String> query = jdbcTemplate.query(sql, args, new RowMapper<String>() {
+            @Override
+            public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getString("password");
+            }
+        });
+        return  query.size()==0?null:query.get(0);
+    }
 
 }
