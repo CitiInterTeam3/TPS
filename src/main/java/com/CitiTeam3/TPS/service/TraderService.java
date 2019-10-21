@@ -7,4 +7,5 @@ public class TraderService {
     @Autowired
     TraderDao dao;
 
+
 }
