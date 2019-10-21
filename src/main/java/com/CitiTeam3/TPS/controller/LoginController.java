@@ -77,5 +77,3 @@ public class LoginController {
         return "product";
     }
 }
-
-}
