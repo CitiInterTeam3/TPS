@@ -17,7 +17,7 @@ public class TraderController {
     @Autowired
     TraderTransactionDao traderTransactionDao;
 
-    @RequestMapping("/cysisu")
+    @RequestMapping("/addTraderTrans")
     //@ResponseBody
     public String saveTraderTransaction(HttpSession session,HttpServletRequest httpServletRequest){
         TraderTransaction traderTransaction=new TraderTransaction();
