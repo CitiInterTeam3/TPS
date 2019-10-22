@@ -1,8 +1,6 @@
 package com.CitiTeam3.TPS.domain;
 
-import java.util.Date;
-
-public class TraderTransaction {
+public class SaleTransaction {
     private String tradeOrigSys;
     private String interId;
     private String transactionDate;
@@ -84,5 +82,4 @@ public class TraderTransaction {
     public void setTransactionDate(String transactionDate) {
         this.transactionDate = transactionDate;
     }
-
 }
