@@ -82,4 +82,7 @@ public class LoginController {
         session.removeAttribute("trader");
         return "homePage";
     }
+
+
+
 }
