@@ -1,8 +1,13 @@
 package com.CitiTeam3.TPS.controller;
 
+import com.CitiTeam3.TPS.dao.SalerDao;
 import com.CitiTeam3.TPS.dao.TraderTransactionDao;
+import com.CitiTeam3.TPS.domain.Sales;
 import com.CitiTeam3.TPS.domain.Trader;
+import com.CitiTeam3.TPS.domain.TraderRequest;
 import com.CitiTeam3.TPS.domain.TraderTransaction;
+import com.CitiTeam3.TPS.service.TraderRequestService;
+import com.CitiTeam3.TPS.service.TraderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
@@ -16,6 +21,12 @@ import javax.servlet.http.HttpSession;
 public class TraderController {
     @Autowired
     TraderTransactionDao traderTransactionDao;
+
+    @Autowired
+    SalerDao salerDao;
+
+    @Autowired
+    TraderRequestService service;
 
     @RequestMapping("/addTraderTrans")
     @ResponseBody
@@ -37,5 +48,23 @@ public class TraderController {
             return "success";
         else
             return "fail";
+    }
+
+    @RequestMapping("addTraderRequest")
+    @ResponseBody
+    public String addTraderRequest(HttpServletRequest request,HttpSession session){
+        TraderRequest tr=new TraderRequest();
+        String traderId=((Trader)session.getAttribute("trader")).getTraderId();
+        Sales sales=salerDao.getSalerByUserName(request.getParameter("salesName"));
+
+        tr.setTargetId(Integer.valueOf(sales.getSalesId()));
+        tr.setPrice(Double.valueOf(request.getParameter("price")));
+        tr.setAmount(Integer.valueOf(request.getParameter("amount")));
+        tr.setType(Integer.valueOf(request.getParameter("type")));
+        tr.setCusipId(request.getParameter("cusipId"));
+        tr.setTraderId(Integer.valueOf(traderId));
+
+        if (service.addRequest(tr))return "success";
+        else return "false";
     }
 }

@@ -16,13 +16,13 @@ public class TraderRequestService {
 
     public boolean addRequest(TraderRequest request){
         int traderId=traderRequestDao.addRequest(request);
-        List<SalesRequest> matchRequest=traderRequestDao.getMatchedSalesRequest(traderId);
-        for (SalesRequest sq :matchRequest) {
-            if (isPriceMatch(sq.getPrice(),request.getPrice())){
-                matchTwoRequest(traderId,sq.getSalesRequestId());
-                break;
-            }
-        }
+//        List<SalesRequest> matchRequest=traderRequestDao.getMatchedSalesRequest(traderId);
+//        for (SalesRequest sq :matchRequest) {
+//            if (isPriceMatch(sq.getPrice(),request.getPrice())){
+//                matchTwoRequest(traderId,sq.getSalesRequestId());
+//                break;
+//            }
+//        }
         return true;
     }
 

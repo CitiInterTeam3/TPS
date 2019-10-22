@@ -22,7 +22,7 @@ public class TraderRequestDao {
     public int addRequest(TraderRequest request){
         String sql="insert into traderRequest(traderId,price,amount," +
                 "type,status,cusipId,issueDate,targetSalesId) values(?,?,?,?,?,?,?,?)";
-        Object args[]=new Object[7];
+        Object args[]=new Object[8];
         args[0]=request.getTraderId();
         args[1]=request.getPrice();
         args[2]=request.getAmount();
