@@ -76,4 +76,10 @@ public class LoginController {
         mv.addAttribute("product",product);
         return "product";
     }
+
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("trader");
+        return "homePage";
+    }
 }
