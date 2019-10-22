@@ -32,7 +32,7 @@ public class TraderTransactionDao {
 
         //match
         String sql="select * from transaction where status = ? and origSys = ? and quantity = ? and traderId= ? and saleId =? and belong=?";
-        Object[] args=new Object[5];
+        Object[] args=new Object[6];
         args[0]=traderTransaction.getStatus();
         args[1]=traderTransaction.getTradeOrigSys();
         args[2]=traderTransaction.getQuantity();

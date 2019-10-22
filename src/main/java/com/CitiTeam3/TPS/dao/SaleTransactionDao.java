@@ -11,6 +11,7 @@ public class SaleTransactionDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
     public int addSaleTransaction(SaleTransaction saleTransaction){
+
         return 1;
     }
 }
