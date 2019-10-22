@@ -8,14 +8,19 @@ import com.CitiTeam3.TPS.domain.TraderRequest;
 import com.CitiTeam3.TPS.domain.TraderTransaction;
 import com.CitiTeam3.TPS.service.TraderRequestService;
 import com.CitiTeam3.TPS.service.TraderService;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class TraderController {
@@ -66,5 +71,18 @@ public class TraderController {
 
         if (service.addRequest(tr))return "success";
         else return "false";
+    }
+
+    @RequestMapping("getConfirmList")
+    @ResponseBody
+    public Map<String, Object> getConfirmList(HttpSession session){
+        Trader trader= (Trader) session.getAttribute("trader");
+        List<TraderRequest> list=service.getTraderRequest(Integer.valueOf(trader.getTraderId()));
+        Map<String ,Object> model=new HashMap<>();
+        model.put("code",0);
+        model.put("msg","");
+        model.put("count",list.size());
+        model.put("data",list);
+        return model;
     }
 }

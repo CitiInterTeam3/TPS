@@ -35,19 +35,19 @@ public class TraderRequestDao {
         return  1;
     }
 
-    public List<TraderRequest> getAllRequest(int traderId){
+    public List<TraderRequest> getAllRequestByTraderId(int traderId){
         String sql="select * from traderRequest where traderId=?";
         return jdbc.query(sql, new Object[]{traderId}, new RowMapper<TraderRequest>() {
             @Override
             public TraderRequest mapRow(ResultSet rs, int rowNum) throws SQLException {
                 TraderRequest request=new TraderRequest();
                 request.setTraderRequestId(rs.getInt("traderRequestId"));
-                request.setTraderId(rs.getInt("tradeId"));
+                request.setTraderId(rs.getInt("traderId"));
                 request.setPrice(rs.getDouble("price"));
                 request.setAmount(rs.getInt("amount"));
                 request.setType(rs.getInt("type"));
                 request.setStatus(rs.getInt("status"));
-                request.setMatchId(rs.getInt("matchSalesId"));
+                request.setMatchId(rs.getInt("matchedSalesRequest"));
                 request.setCusipId(rs.getString("cusipId"));
                 request.setIssueDate(rs.getDate("issueDate"));
                 request.setTargetId(rs.getInt("targetSalesId"));
@@ -63,12 +63,12 @@ public class TraderRequestDao {
             public TraderRequest mapRow(ResultSet rs, int rowNum) throws SQLException {
                 TraderRequest request=new TraderRequest();
                 request.setTraderRequestId(rs.getInt("traderRequestId"));
-                request.setTraderId(rs.getInt("tradeId"));
+                request.setTraderId(rs.getInt("traderId"));
                 request.setPrice(rs.getDouble("price"));
                 request.setAmount(rs.getInt("amount"));
                 request.setType(rs.getInt("type"));
                 request.setStatus(rs.getInt("status"));
-                request.setMatchId(rs.getInt("matchSalesId"));
+                request.setMatchId(rs.getInt("matchedSalesRequest"));
                 request.setCusipId(rs.getString("cusipId"));
                 request.setIssueDate(rs.getDate("issueDate"));
                 request.setTargetId(rs.getInt("targetSalesId"));

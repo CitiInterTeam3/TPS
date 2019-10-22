@@ -22,7 +22,7 @@ public class SalesController {
     @RequestMapping("addSales")
     @ResponseBody
     public String addSales(){
-        Sales sales=new Sales("1001","why","123");
+        Sales sales=new Sales("123","wh1231y","213123");
         service.save(sales);
         return "success";
     }

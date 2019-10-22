@@ -1,12 +1,10 @@
 package com.CitiTeam3.TPS.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "sales")
 public class Sales implements Serializable {
     @Id
     private String salesId;

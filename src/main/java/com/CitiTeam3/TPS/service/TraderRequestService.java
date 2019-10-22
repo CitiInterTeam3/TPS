@@ -32,8 +32,11 @@ public class TraderRequestService {
         return  false;
     }
 
-    public boolean matchTwoRequest(int traderId,int requestId){
+    public List<TraderRequest> getTraderRequest(int traderId){
+        return traderRequestDao.getAllRequestByTraderId(traderId);
+    }
 
+    public boolean matchTwoRequest(int traderId,int requestId){
         return false;
     }
 }
