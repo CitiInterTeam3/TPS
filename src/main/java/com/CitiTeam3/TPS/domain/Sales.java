@@ -14,6 +14,7 @@ public class Sales implements Serializable {
     private String password;
 
     public Sales(){}
+
     public Sales(String salesId,String salesName,String password){
         this.salesId=salesId;
         this.salesName=salesName;
