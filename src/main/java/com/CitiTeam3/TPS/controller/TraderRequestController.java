@@ -87,10 +87,11 @@ public class TraderRequestController {
         return model;
     }
 
-    @RequestMapping("getMatchedSalesRequest")
+    @RequestMapping("getTraderHistory")
     @ResponseBody
-    public Map<String, Object> getMatchSalesRequest(HttpServletRequest request){
-        List<SalesRequest> list=service.getMatchRequest(Integer.valueOf(request.getParameter("traderRequestId")));
+    public Map<String, Object> getTraderHistory(HttpSession session){
+        Trader trader= (Trader) session.getAttribute("trader");
+        List<TraderRequest> list=service.getTraderRequest(Integer.valueOf(trader.getTraderId()));
         Map<String ,Object> model=new HashMap<>();
         model.put("code",0);
         model.put("msg","");
@@ -98,4 +99,9 @@ public class TraderRequestController {
         model.put("data",list);
         return model;
     }
+
+
+
+
+
 }
