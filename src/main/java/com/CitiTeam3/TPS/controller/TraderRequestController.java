@@ -1,6 +1,7 @@
 package com.CitiTeam3.TPS.controller;
 
 import com.CitiTeam3.TPS.dao.SalerDao;
+import com.CitiTeam3.TPS.dao.SalesRepo;
 import com.CitiTeam3.TPS.dao.TraderTransactionDao;
 import com.CitiTeam3.TPS.domain.Sales;
 import com.CitiTeam3.TPS.domain.Trader;
@@ -29,6 +30,9 @@ public class TraderRequestController {
 
     @Autowired
     SalerDao salerDao;
+
+    @Autowired
+    SalesRepo salesRepo;
 
     @Autowired
     TraderRequestService service;
@@ -60,8 +64,8 @@ public class TraderRequestController {
     public String addTraderRequest(HttpServletRequest request,HttpSession session){
         TraderRequest tr=new TraderRequest();
         String traderId=((Trader)session.getAttribute("trader")).getTraderId();
-        Sales sales=salerDao.getSalerByUserName(request.getParameter("salesName"));
-
+        //Sales sales=salerDao.getSalerByUserName(request.getParameter("salesName"));
+        Sales sales=salesRepo.getBySalesName(request.getParameter("salesName"));
         tr.setTargetId(Integer.valueOf(sales.getSalesId()));
         tr.setPrice(Double.valueOf(request.getParameter("price")));
         tr.setAmount(Integer.valueOf(request.getParameter("amount")));

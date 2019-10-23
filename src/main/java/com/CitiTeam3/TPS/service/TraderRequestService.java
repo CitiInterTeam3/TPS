@@ -1,7 +1,6 @@
 package com.CitiTeam3.TPS.service;
 
 import com.CitiTeam3.TPS.dao.TraderRequestDao;
-import com.CitiTeam3.TPS.domain.SalesRequest;
 import com.CitiTeam3.TPS.domain.TraderRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
