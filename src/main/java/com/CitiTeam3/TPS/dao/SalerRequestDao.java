@@ -97,7 +97,7 @@ public class SalerRequestDao {
             public SalesRequest mapRow(ResultSet rs, int rowNum) throws SQLException {
                 SalesRequest request=new SalesRequest();
                 request.setSalesRequestId(rs.getInt("salesRequestId"));
-                request.setTraderId(rs.getInt("salesId"));
+                request.setSalesId(rs.getInt("salesId"));
                 request.setPrice(rs.getDouble("price"));
                 request.setAmount(rs.getInt("amount"));
                 request.setType(rs.getInt("type"));
