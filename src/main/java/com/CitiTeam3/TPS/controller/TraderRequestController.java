@@ -3,10 +3,7 @@ package com.CitiTeam3.TPS.controller;
 import com.CitiTeam3.TPS.dao.SalerDao;
 import com.CitiTeam3.TPS.dao.SalesRepo;
 import com.CitiTeam3.TPS.dao.TraderTransactionDao;
-import com.CitiTeam3.TPS.domain.Sales;
-import com.CitiTeam3.TPS.domain.Trader;
-import com.CitiTeam3.TPS.domain.TraderRequest;
-import com.CitiTeam3.TPS.domain.TraderTransaction;
+import com.CitiTeam3.TPS.domain.*;
 import com.CitiTeam3.TPS.service.TraderRequestService;
 import com.CitiTeam3.TPS.service.TraderService;
 import com.fasterxml.jackson.databind.util.JSONPObject;
@@ -82,6 +79,18 @@ public class TraderRequestController {
     public Map<String, Object> getConfirmList(HttpSession session){
         Trader trader= (Trader) session.getAttribute("trader");
         List<TraderRequest> list=service.getTraderRequest(Integer.valueOf(trader.getTraderId()));
+        Map<String ,Object> model=new HashMap<>();
+        model.put("code",0);
+        model.put("msg","");
+        model.put("count",list.size());
+        model.put("data",list);
+        return model;
+    }
+
+    @RequestMapping("getMatchedSalesRequest")
+    @ResponseBody
+    public Map<String, Object> getMatchSalesRequest(HttpServletRequest request){
+        List<SalesRequest> list=service.getMatchRequest(Integer.valueOf(request.getParameter("traderRequestId")));
         Map<String ,Object> model=new HashMap<>();
         model.put("code",0);
         model.put("msg","");

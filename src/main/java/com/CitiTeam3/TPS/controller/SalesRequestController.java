@@ -39,4 +39,6 @@ public class SalesRequestController {
         if (salesRequestDao.addRequest(st))return "success";
         else return "false";
     }
+
+
 }

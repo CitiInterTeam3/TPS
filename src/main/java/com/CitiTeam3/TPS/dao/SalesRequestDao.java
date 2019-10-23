@@ -29,5 +29,14 @@ public class SalesRequestDao {
         return  jdbc.update(sql,args)==1;
     }
 
+    public boolean updateStatus(SalesRequest request){
+        String sql="update salesRequest set status=? where salesRequestId=?";
+        return jdbc.update(sql,request.getStatus(),request.getSalesRequestId())==1;
+    }
+
+    public boolean updateMatchedId(SalesRequest request){
+        String sql="update salesRequest set matchedTraderRequest=? where salesRequestId=?";
+        return jdbc.update(sql,request.getMatchId(),request.getSalesRequestId())==1;
+    }
 
 }

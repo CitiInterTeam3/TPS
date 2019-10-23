@@ -19,7 +19,7 @@ public class TraderRequestDao {
     @Autowired
     JdbcTemplate jdbc;
 
-    public int addRequest(TraderRequest request){
+    public boolean addRequest(TraderRequest request){
         String sql="insert into traderRequest(traderId,price,amount," +
                 "type,status,cusipId,issueDate,targetSalesId) values(?,?,?,?,?,?,?,?)";
         Object args[]=new Object[8];
@@ -31,8 +31,7 @@ public class TraderRequestDao {
         args[5]=request.getCusipId();
         args[6]=new Date(System.currentTimeMillis());
         args[7]=request.getTargetId();
-        jdbc.update(sql,args);
-        return  1;
+        return jdbc.update(sql,args)==1;
     }
 
     public List<TraderRequest> getAllRequestByTraderId(int traderId){
@@ -116,9 +115,9 @@ public class TraderRequestDao {
         return jdbc.update(sql,request.getStatus(),request.getTraderRequestId())==1;
     }
 
-    public boolean updateMatchedSalesId(int traderRequestId,int targetSalesRequestId){
-        String sql="update traderRequest set targetSalesId=? where traderRequestId=?";
-        return jdbc.update(sql,targetSalesRequestId,traderRequestId)==1;
+    public boolean updateMatchedSalesId(TraderRequest request){
+        String sql="update traderRequest set matchedSalesRequest=? where traderRequestId=?";
+        return jdbc.update(sql,request.getMatchId(),request.getTraderRequestId())==1;
     }
 
 }
