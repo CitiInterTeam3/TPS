@@ -76,6 +76,9 @@
                     fixed: false, //不固定
                     maxmin: true,
                     content: '/matchedTrade'
+                    success: function(layero, index){
+                        console.log(layero, index);
+                    }
                 });
             } else if(obj.event === 'edit'){
                 layer.prompt({
