@@ -42,14 +42,6 @@ public class SalesRequest {
     }
 
 
-    public int getTraderId() {
-        return salesId;
-    }
-
-    public void setTraderId(int salesId) {
-        this.salesId = salesId;
-    }
-
     public double getPrice() {
         return price;
     }
