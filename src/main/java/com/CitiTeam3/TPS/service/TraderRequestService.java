@@ -56,6 +56,6 @@ public class TraderRequestService {
     }
 
     public List<SalesRequest> getMatchRequest(int traderRequestId){
-        return null;
+        return traderRequestDao.getMatchedSalesRequest(traderRequestId);
     }
 }
