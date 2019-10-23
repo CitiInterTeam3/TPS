@@ -39,6 +39,11 @@ public class SaleController {
     {
         return "/sale/salerHomePage";
     }
+    @RequestMapping("/saleHistory")
+    public String saleHistory()
+    {
+        return "sale/saleHistory";
+    }
     @RequestMapping("/loginForSales")
     @ResponseBody
     public String login(HttpServletRequest request){

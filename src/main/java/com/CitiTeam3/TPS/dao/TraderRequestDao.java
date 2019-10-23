@@ -5,21 +5,26 @@ import com.CitiTeam3.TPS.domain.Status;
 import com.CitiTeam3.TPS.domain.TraderRequest;
 import com.CitiTeam3.TPS.domain.Type;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCallback;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class TraderRequestDao {
     @Autowired
     JdbcTemplate jdbc;
 
-    public boolean addRequest(TraderRequest request){
+    public Number addRequest(TraderRequest request){
         String sql="insert into traderRequest(traderId,price,amount," +
                 "type,status,cusipId,issueDate,targetSalesId) values(?,?,?,?,?,?,?,?)";
         Object args[]=new Object[8];
@@ -31,7 +36,23 @@ public class TraderRequestDao {
         args[5]=request.getCusipId();
         args[6]=new Date(System.currentTimeMillis());
         args[7]=request.getTargetId();
-        return jdbc.update(sql,args)==1;
+        GeneratedKeyHolder holder=new GeneratedKeyHolder();
+        jdbc.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                PreparedStatement statement=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+                statement.setObject(1,request.getTraderId());
+                statement.setObject(2,request.getPrice());
+                statement.setObject(3,request.getAmount());
+                statement.setObject(4,request.getType());
+                statement.setObject(5,Status.PENDDING.getValue());
+                statement.setObject(6,request.getCusipId());
+                statement.setObject(7,new Date(System.currentTimeMillis()));
+                statement.setObject(8,request.getTraderId());
+                return statement;
+            }
+        }, holder);
+        return holder.getKey();
     }
 
     public List<TraderRequest> getAllRequestByTraderId(int traderId){
@@ -101,7 +122,7 @@ public class TraderRequestDao {
                 request.setAmount(rs.getInt("amount"));
                 request.setType(rs.getInt("type"));
                 request.setStatus(rs.getInt("status"));
-                request.setMatchId(rs.getInt("matchedTraderRequest"));
+                request.setMatchId(rs.getInt("mathchedTraderRequest"));
                 request.setCusipId(rs.getString("cusipId"));
                 request.setIssueDate(rs.getDate("issueDate"));
                 request.setTargetId(rs.getInt("targetTraderId"));

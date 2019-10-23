@@ -30,8 +30,8 @@ public class TraderRequestService {
      * @return whether the request has been matched
      */
     public boolean addRequest(TraderRequest request){
-        traderRequestDao.addRequest(request);
-        List<SalesRequest> matchRequest=traderRequestDao.getMatchedSalesRequest(request.getTraderRequestId());
+        Number key=traderRequestDao.addRequest(request);
+        List<SalesRequest> matchRequest=traderRequestDao.getMatchedSalesRequest(key.intValue());
         for (SalesRequest sq :matchRequest) {
             if (isPriceMatch(sq.getPrice(),request.getPrice())){
                 matchTwoRequest(request,sq);
