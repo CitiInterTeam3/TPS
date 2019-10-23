@@ -63,15 +63,15 @@ public class TraderRequestController {
         String traderId=((Trader)session.getAttribute("trader")).getTraderId();
         //Sales sales=salerDao.getSalerByUserName(request.getParameter("salesName"));
         Sales sales=salesRepo.getBySalesName(request.getParameter("salesName"));
+        if (sales==null)return "no such sales";
         tr.setTargetId(Integer.valueOf(sales.getSalesId()));
         tr.setPrice(Double.valueOf(request.getParameter("price")));
         tr.setAmount(Integer.valueOf(request.getParameter("amount")));
         tr.setType(Integer.valueOf(request.getParameter("type")));
         tr.setCusipId(request.getParameter("cusipId"));
         tr.setTraderId(Integer.valueOf(traderId));
-
-        if (service.addRequest(tr))return "success";
-        else return "false";
+        boolean ismatched=service.addRequest(tr);
+        return "success";
     }
 
     @RequestMapping("getConfirmList")

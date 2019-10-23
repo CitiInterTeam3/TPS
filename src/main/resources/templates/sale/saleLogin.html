@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,8 +11,6 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sign-in/">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/layui/css/layui.css">
-    <!-- Bootstrap core CSS -->
-    <link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
     <style>
@@ -84,9 +82,9 @@
     <img class="mb-4" src="/img/CITI.jpg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Sale Workstation</h1>
     <label for="inputUserName" class="sr-only">UserName</label>
-    <input id="inputUserName" name="" class="form-control" placeholder="Email address" required autofocus>
+    <input id="inputUserName" name="userName" class="form-control" placeholder="Email address" required autofocus>
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <input type="password" name="psw" id="inputPassword" class="form-control" placeholder="Password" required>
     <div class="checkbox mb-3">
         <label>
             <input type="checkbox" value="remember-me"> Remember me
@@ -95,6 +93,39 @@
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
 </form>
+
+<script src="/js/jquery-3.3.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="/layui/layui.js"></script>
+
+<script>
+    var layer;
+    layui.use('layer', function(){
+        layer = layui.layer;
+    });
+
+    $("#login").click(function () {
+        $.ajax({
+            url:"checkTrader",
+            dataType:"text",
+            method:"post",
+            data:$('#form').serialize(),
+            success:function (data) {
+                if (data=="success"){
+                    $(location).attr('href', 'personalHome');
+                }
+                else {
+                    layer.msg("invalid password or user name")
+                }
+            },
+            error:function () {
+                $().alert("network failed")
+            }
+        });
+    });
+
+</script>
 </body>
 </html>
 

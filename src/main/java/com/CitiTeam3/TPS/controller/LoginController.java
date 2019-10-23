@@ -50,7 +50,6 @@ public class LoginController {
     @RequestMapping("/checkTrader")
     @ResponseBody
     public String login(HttpServletRequest request){
-        String username=request.getParameter("userName");
         Trader trader=service.isValid(request.getParameter("userName"),
                 request.getParameter("psw"));
         if (trader!=null){

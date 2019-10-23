@@ -15,7 +15,7 @@
 <form class="layui-form" id="form1">
 
     <div class="layui-form-item">
-        <label class="layui-form-label">SalesId</label>
+        <label class="layui-form-label">sales Name</label>
         <div class="layui-input-inline">
             <input type="text" name="salesName" lay-verify="required" lay-reqtext="sales name can not be null" placeholder="please input" autocomplete="off" class="layui-input">
         </div>
@@ -97,7 +97,7 @@
                         $("#reset").click();
                     }
                     else {
-                        layer.msg("add failed")
+                        layer.msg(returnData)
                     }
                 },
                 error:function () {
