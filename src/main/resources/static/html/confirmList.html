@@ -65,6 +65,7 @@
             //console.log(obj)
             if(obj.event === 'del'){
                 clickId=obj.data.traderRequestId;
+                console.log(clickId);
                 // layer.confirm('真的删除行么', function(index){
                 //     obj.del();
                 //     layer.close(index);
@@ -75,9 +76,10 @@
                     area: ['700px', '450px'],
                     fixed: false, //不固定
                     maxmin: true,
-                    content: '/matchedTrade'
-                    success: function(layero, index){
-                        console.log(layero, index);
+                    content: '/matchedTrade',
+2                   success: function(layero, index){
+                        var body = layer.getChildFrame('body', index);
+                        body.contents().find("#clickId").val(data.id);  // #detailId  子页面元素id
                     }
                 });
             } else if(obj.event === 'edit'){

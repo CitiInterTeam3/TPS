@@ -1,7 +1,12 @@
 
 layui.use('table', function(){
     var table = layui.table;
+    var body = layer.getChildFrame('body', index);
 
+    // loadData子页面方法
+    var laydate;
+    document.getElementById("iframe").contentWindow.loadData($,laydate,data.id);
+    body.contents().find("#detailId").val(data.id);  // #detailId  子页面元素id
     table.render({
         elem: '#test'
         //,url:'/getMatchedSalesRequest?traderRequestId='+$("[name='traderRequestId']").val()
