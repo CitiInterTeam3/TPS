@@ -43,7 +43,8 @@ public class SaleController {
         Sales trader=service.isValid(request.getParameter("userName"),
                 request.getParameter("psw"));
         if (trader!=null){
-            request.getSession().setAttribute("trader",trader);
+
+            request.getSession().setAttribute("sales",trader);
             return "success";
         }
         else return "faild";
