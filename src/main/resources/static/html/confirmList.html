@@ -27,6 +27,7 @@
 <script src="/layui/layui.js"></script>
 <!--your script-->
 <script>
+    var clickId;
     layui.use('table', function(){
         var table = layui.table;
 
@@ -63,9 +64,18 @@
             var data = obj.data;
             //console.log(obj)
             if(obj.event === 'del'){
-                layer.confirm('真的删除行么', function(index){
-                    obj.del();
-                    layer.close(index);
+                clickId=obj.data.traderRequestId;
+                // layer.confirm('真的删除行么', function(index){
+                //     obj.del();
+                //     layer.close(index);
+                // });
+
+                layer.open({
+                    type: 2,
+                    area: ['700px', '450px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    content: '/matchedTrade'
                 });
             } else if(obj.event === 'edit'){
                 layer.prompt({
