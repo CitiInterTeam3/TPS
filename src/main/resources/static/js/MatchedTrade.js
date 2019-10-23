@@ -4,7 +4,7 @@ layui.use('table', function(){
 
     table.render({
         elem: '#test'
-        ,url:'/getConfirmList?traderRequestId='+$("[name='traderRequestId']").val()
+        ,url:'/getMatchedSalesRequest?traderRequestId='+$("[name='traderRequestId']").val()
         ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
         ,cellMinWidth:60
         ,title: 'Trades'
