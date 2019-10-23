@@ -4,7 +4,7 @@ layui.use('table', function(){
 
     table.render({
         elem: '#test'
-        ,url:'/getSaleHistory'
+        ,url:'/getTraderHistory'
         ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
         ,cols: [[
             {field:'cusipId', title:'cusipId',sort: true,fixed: 'left'}
