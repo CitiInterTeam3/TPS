@@ -1,16 +1,16 @@
 
 layui.use('table', function(){
     var table = layui.table;
-    var body = layer.getChildFrame('body', index);
+    //var body = layer.getChildFrame('body', index);
 
     // loadData子页面方法
     var laydate;
-    document.getElementById("iframe").contentWindow.loadData($,laydate,data.id);
-    body.contents().find("#detailId").val(data.id);  // #detailId  子页面元素id
+    // document.getElementById("iframe").contentWindow.loadData($,laydate,data.id);
+    // body.contents().find("#detailId").val(data.id);  // #detailId  子页面元素id
     table.render({
         elem: '#test'
-        //,url:'/getMatchedSalesRequest?traderRequestId='+$("[name='traderRequestId']").val()
-        ,url:'/getMatchedSalesRequest?traderRequestId=1001'
+        // ,url:'/getMatchedSalesRequest?traderRequestId='+$("[name='traderRequestId']").val()
+        ,url:'/getMatchedSalesRequest?traderRequestId=1'
         ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
         ,cellMinWidth:60
         ,title: 'Trades'

@@ -70,18 +70,18 @@
                 //     obj.del();
                 //     layer.close(index);
                 // });
-
                 layer.open({
                     type: 2,
                     area: ['700px', '450px'],
                     fixed: false, //不固定
                     maxmin: true,
-                    content: '/matchedTrade',
-2                   success: function(layero, index){
+                    content: '/matchedTrade?traderRequestId='+clickId,
+                    success: function(layero, index){
                         var body = layer.getChildFrame('body', index);
                         body.contents().find("#clickId").val(data.id);  // #detailId  子页面元素id
                     }
                 });
+
             } else if(obj.event === 'edit'){
                 layer.prompt({
                     formType: 2

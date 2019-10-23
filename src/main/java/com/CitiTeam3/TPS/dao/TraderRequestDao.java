@@ -122,7 +122,7 @@ public class TraderRequestDao {
                 request.setAmount(rs.getInt("amount"));
                 request.setType(rs.getInt("type"));
                 request.setStatus(rs.getInt("status"));
-                request.setMatchId(rs.getInt("matchedTraderRequest"));
+                request.setMatchId(rs.getInt("mathchedTraderRequest"));
                 request.setCusipId(rs.getString("cusipId"));
                 request.setIssueDate(rs.getDate("issueDate"));
                 request.setTargetId(rs.getInt("targetTraderId"));
