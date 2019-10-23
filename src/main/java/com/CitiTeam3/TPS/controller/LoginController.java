@@ -37,12 +37,17 @@ public class LoginController {
         return  "test";
     }
 
-    @RequestMapping("/homePage")
-    public String homePage(Model mv, HttpServletRequest request){
-        return  "homePage";
+    @RequestMapping("/traderLogin")
+    public String traderLogin(Model mv, HttpServletRequest request){
+        return  "trader/traderLogin";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping("/salesLogin")
+    public String salesLogin(Model mv, HttpServletRequest request){
+        return  "sale/saleLogin";
+    }
+
+    @RequestMapping("/checkTrader")
     @ResponseBody
     public String login(HttpServletRequest request){
         String username=request.getParameter("userName");
