@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Component
-public class TraderRequestDao {
+public class SalerRequestDao {
     @Autowired
     JdbcTemplate jdbc;
 

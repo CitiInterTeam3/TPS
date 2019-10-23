@@ -43,7 +43,8 @@ public class SaleController {
         Sales trader=service.isValid(request.getParameter("userName"),
                 request.getParameter("psw"));
         if (trader!=null){
-            request.getSession().setAttribute("trader",trader);
+
+            request.getSession().setAttribute("sales",trader);
             return "success";
         }
         else return "faild";
@@ -51,12 +52,12 @@ public class SaleController {
 
     @RequestMapping("/sale/salerPersonalHome")
     public String personHome(Model model,HttpSession session){
-        Object trader=session.getAttribute("trader");
-        if (trader==null){
+        Object sales=session.getAttribute("sales");
+        if (sales==null){
             model.addAttribute("msg","session time out");
             return "error";
         }else {
-            model.addAttribute("trader",trader);
+            model.addAttribute("sales",sales);
             return "sale/salerPersonalHome";
         }
     }

@@ -2,11 +2,11 @@ package com.CitiTeam3.TPS.domain;
 
 import java.sql.Date;
 
-public class SalesRequest {
+public class SalerRequest {
 
 
-    int SalesRequestId;
-    int salesId;
+    int traderRequestId;
+    int TraderId;
     double price;
     int amount;
     int type;
@@ -16,15 +16,6 @@ public class SalesRequest {
     Date issueDate;
     int targetId;
 
-
-    public int getSalesId() {
-        return salesId;
-    }
-
-    public void setSalesId(int salesId) {
-        this.salesId = salesId;
-    }
-
     public int getTargetId() {
         return targetId;
     }
@@ -33,14 +24,22 @@ public class SalesRequest {
         this.targetId = targetId;
     }
 
-    public int getSalesRequestId() {
-        return SalesRequestId;
+
+    public int getTraderRequestId() {
+        return traderRequestId;
     }
 
-    public void setSalesRequestId(int salesRequestId) {
-        SalesRequestId = salesRequestId;
+    public void setTraderRequestId(int traderRequestId) {
+        this.traderRequestId = traderRequestId;
     }
 
+    public int getTraderId() {
+        return TraderId;
+    }
+
+    public void setTraderId(int traderId) {
+        TraderId = traderId;
+    }
 
     public double getPrice() {
         return price;
@@ -97,4 +96,6 @@ public class SalesRequest {
     public void setIssueDate(Date issueDate) {
         this.issueDate = issueDate;
     }
+
+
 }

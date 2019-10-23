@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class TraderController {
+public class TraderRequestController {
     @Autowired
     TraderTransactionDao traderTransactionDao;
 

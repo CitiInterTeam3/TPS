@@ -18,6 +18,7 @@
 <!--    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>-->
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">匹配</a>
 </script>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="/js/jquery-3.3.1.js"></script>
@@ -42,6 +43,7 @@
                 ,layEvent: 'LAYTABLE_TIPS'
                 ,icon: 'layui-icon-tips'
             }]
+            ,cellMinWidth:100
             ,title: 'Trades'
             ,cols: [[
                 {field:'cusipId', title:'cusipId',sort: true,fixed: 'left'}
