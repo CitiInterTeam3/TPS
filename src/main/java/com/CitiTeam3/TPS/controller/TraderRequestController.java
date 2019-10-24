@@ -9,6 +9,7 @@ import com.CitiTeam3.TPS.service.TraderService;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -87,6 +88,18 @@ public class TraderRequestController {
         return model;
     }
 
+    @RequestMapping("getMatchedSalesRequest")
+    @ResponseBody
+    public Map<String, Object> getMatchSalesRequest(HttpServletRequest request){
+        List<SalesRequest> list=service.getMatchRequest(Integer.valueOf(request.getParameter("traderRequestId")));
+        Map<String ,Object> model=new HashMap<>();
+        model.put("code",0);
+        model.put("msg","");
+        model.put("count",list.size());
+        model.put("data",list);
+        return model;
+    }
+
     @RequestMapping("/getTraderHistory")
     @ResponseBody
     public Map<String, Object> getTraderHistory(HttpSession session){
@@ -100,8 +113,21 @@ public class TraderRequestController {
         return model;
     }
 
+    @RequestMapping("matchRequest")
+    @ResponseBody
+    public String matchRequest(HttpServletRequest request){
+        int traderRequestId=Integer.valueOf(request.getParameter("traderRequestId"));
+        int salesRequestId=Integer.valueOf(request.getParameter("salesRequestId"));
+        TraderRequest traderRequest=new TraderRequest();
+        traderRequest.setTraderRequestId(traderRequestId);
+        SalesRequest salesRequest=new SalesRequest();
+        salesRequest.setSalesRequestId(salesRequestId);
+        try{
+            service.matchTwoRequest(traderRequest,salesRequest);
+            return "success";
+        }catch (DataAccessException e){
+            return "failed";
+        }
 
-
-
-
+    }
 }
