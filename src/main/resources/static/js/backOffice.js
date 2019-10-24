@@ -54,6 +54,26 @@ layui.use('table', function(){
             layer.confirm('conform accept?', function(index){
                 obj.del();
                 layer.close(index);
+
+                $.ajax({
+                    url:"/backOfficeAccept?traderRequestId="+data.traderRequestId,
+                    dataType:"text",
+                    method:"post",
+                    data:$('#form1').serialize(),
+                    success:function (returnData) {
+                        if (returnData=="success"){
+                            layer.msg("add success");
+                            $("#reset").click();
+                        }
+                        else {
+                            layer.msg(returnData)
+                        }
+                    },
+                    error:function () {
+                        $().alert("network failed")
+                    }
+                });
+
             });
         } else if(obj.event === 'del'){
             layer.prompt({
@@ -61,9 +81,25 @@ layui.use('table', function(){
                 ,title:'拒绝理由'
                 ,value: data.email
             }, function(value, index){
-                obj.update({
-                    email: value
-                });
+
+                    $.ajax({
+                        url:"/backOfficeReject?traderRequestId="+data.traderRequestId+"&"+"rejectReason="+value,
+                        dataType:"text",
+                        method:"post",
+                        data:$('#form1').serialize(),
+                        success:function (returnData) {
+                            if (returnData=="success"){
+                                layer.msg("add success");
+                                $("#reset").click();
+                            }
+                            else {
+                                layer.msg(returnData)
+                            }
+                        },
+                        error:function () {
+                            $().alert("network failed")
+                        }
+                    });
                 layer.close(index);
             });
         }

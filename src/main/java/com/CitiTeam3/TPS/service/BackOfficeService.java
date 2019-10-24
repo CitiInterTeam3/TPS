@@ -46,8 +46,45 @@ public class BackOfficeService {
     {
         String sql="update traderRequest set status=3 where traderRequestId=?";
         int rowCount=jdbcTemplate.update(sql,traderRequestId);
-
+        Object []args=new Object[1];
+        args[0]=traderRequestId;
         sql="select matchedSalesRequest from traderRequest where traderRequestId=?";
+        List<Integer> query=jdbcTemplate.query(sql,args,new RowMapper<Integer>() {
+            @Override
+            public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Integer saleRequestId;
+                saleRequestId=rs.getInt("matchedSalesRequest");
+                return saleRequestId;
+            }
+        });
+        sql="update salesRequest set status=3 where salesRequestId=?";
+        if(query.size()<1)
+            return 0;
+        rowCount=jdbcTemplate.update(sql,query.get(0));
+        return rowCount;
+    }
+
+    public int rejected(int traderRequestId,String reason)
+    {
+        String sql="update traderRequest set status=4, rejectReason=? where traderRequestId= ?";
+        int rowCount=jdbcTemplate.update(sql,reason,traderRequestId);
+
+
+        Object []args=new Object[1];
+        args[0]=traderRequestId;
+        sql="select matchedSalesRequest from traderRequest where traderRequestId=?";
+        List<Integer> query=jdbcTemplate.query(sql,args,new RowMapper<Integer>() {
+            @Override
+            public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Integer saleRequestId;
+                saleRequestId=rs.getInt("matchedSalesRequest");
+                return saleRequestId;
+            }
+        });
+        if(query.size()<1)
+            return 0;
+        sql="update salesRequest set status=4, rejectReason=? where salesRequestId= ?";
+        jdbcTemplate.update(sql,reason,query.get(0));
         return rowCount;
     }
 }
