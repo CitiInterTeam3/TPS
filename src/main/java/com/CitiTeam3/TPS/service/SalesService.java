@@ -38,11 +38,11 @@ public class SalesService {
                 salerRequest.setAmount(rs.getInt("amount"));
                 salerRequest.setCusipId(rs.getString("cusipId"));
                 salerRequest.setIssueDate(rs.getDate("issueDate"));
-                salerRequest.setMatchId(rs.getInt("matchedTraderRequest"));
+                salerRequest.setMatchId(rs.getInt("mathchedTraderRequest"));
                 salerRequest.setPrice(rs.getDouble("price"));
                 salerRequest.setStatus(rs.getInt("status"));
                 salerRequest.setTargetId(rs.getInt("salesId"));
-                salerRequest.setTraderRequestId(rs.getInt("salesRequestedId"));
+                salerRequest.setTraderRequestId(rs.getInt("salesRequestId"));
                 salerRequest.setType(rs.getInt("type"));
                 return salerRequest;
             }

@@ -11,7 +11,7 @@ layui.use('table', function(){
         elem: '#test'
         // ,url:'/getMatchedSalesRequest?traderRequestId='+$("[name='traderRequestId']").val()
         ,url:'/getMatchedSalesRequest?traderRequestId=1'
-        ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+        ,toolbar: '#toolbarDemo'  //开启头部工具栏，并为其绑定左侧模板
         ,cellMinWidth:60
         ,title: 'Trades'
         ,cols: [[
