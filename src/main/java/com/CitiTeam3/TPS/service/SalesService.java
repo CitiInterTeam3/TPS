@@ -39,7 +39,7 @@ public class SalesService {
                 saleEntity.setAmount(rs.getInt("amount"));
                 saleEntity.setCusipId(rs.getString("cusipId"));
                 saleEntity.setIssueDate(rs.getDate("issueDate"));
-                saleEntity.setMatchId(rs.getInt("mathchedTraderRequest"));
+                saleEntity.setMatchId(rs.getInt("matchedTraderRequest"));
                 saleEntity.setPrice(rs.getDouble("price"));
                 saleEntity.setStatus(rs.getInt("status"));
                 saleEntity.setTargetId(rs.getInt("salesId"));
