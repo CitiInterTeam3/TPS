@@ -2,10 +2,7 @@ package com.CitiTeam3.TPS.service;
 
 import com.CitiTeam3.TPS.dao.SalesRequestDao;
 import com.CitiTeam3.TPS.dao.TraderRequestDao;
-import com.CitiTeam3.TPS.domain.SalesRequest;
-import com.CitiTeam3.TPS.domain.Status;
-import com.CitiTeam3.TPS.domain.TraderRequest;
-import com.CitiTeam3.TPS.domain.TraderTransaction;
+import com.CitiTeam3.TPS.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -47,7 +44,7 @@ public class TraderRequestService {
         return  false;
     }
 
-    public List<TraderRequest> getTraderRequest(int traderId){
+    public List<TraderEntity> getTraderRequest(int traderId){
         return traderRequestDao.getAllRequestByTraderId(traderId);
     }
 
@@ -66,26 +63,27 @@ public class TraderRequestService {
         return traderRequestDao.getMatchedSalesRequest(traderRequestId);
     }
 
-    public List<TraderRequest> getTradeHistory(int traderId)
+    public List<TraderEntity> getTradeHistory(int traderId)
     {
         String sql="select * from traderRequest where traderId = ? order by issueDate desc";
         Object[] args=new Object[1];
         args[0]=traderId;
-        List<TraderRequest> query = jdbc.query(sql,args,new RowMapper<TraderRequest>() {
+        List<TraderEntity> query = jdbc.query(sql,args,new RowMapper<TraderEntity>() {
             @Override
-            public TraderRequest mapRow(ResultSet rs, int rowNum) throws SQLException {
-                TraderRequest traderRequest=new TraderRequest();
+            public TraderEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
+                TraderEntity traderEntity=new TraderEntity();
 //                traderTransaction1.setTradeOrigSys(rs.getString("origSys"));
-                traderRequest.setAmount(rs.getInt("amount"));
-                traderRequest.setCusipId(rs.getString("cusipId"));
-                traderRequest.setIssueDate(rs.getDate("issueDate"));
-                traderRequest.setMatchId(rs.getInt("matchedSalesRequest"));
-                traderRequest.setPrice(rs.getDouble("price"));
-                traderRequest.setStatus(rs.getInt("status"));
-                traderRequest.setTargetId(rs.getInt("traderId"));
-                traderRequest.setTraderRequestId(rs.getInt("traderRequestedId"));
-                traderRequest.setType(rs.getInt("type"));
-                return traderRequest;
+                traderEntity.setAmount(rs.getInt("amount"));
+                traderEntity.setCusipId(rs.getString("cusipId"));
+                traderEntity.setIssueDate(rs.getDate("issueDate"));
+                traderEntity.setMatchId(rs.getInt("matchedSalesRequest"));
+                traderEntity.setPrice(rs.getDouble("price"));
+                traderEntity.setStatus(rs.getInt("status"));
+                traderEntity.setTargetId(rs.getInt("traderId"));
+                traderEntity.setTraderRequestId(rs.getInt("traderRequestId"));
+                traderEntity.setType(rs.getInt("type"));
+                traderEntity.setRejectReason(rs.getString("rejectReason"));
+                return traderEntity;
             }
         });
         return query;

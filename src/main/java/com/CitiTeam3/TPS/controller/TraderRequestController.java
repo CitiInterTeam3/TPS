@@ -79,7 +79,7 @@ public class TraderRequestController {
     @ResponseBody
     public Map<String, Object> getConfirmList(HttpSession session){
         Trader trader= (Trader) session.getAttribute("trader");
-        List<TraderRequest> list=service.getTraderRequest(Integer.valueOf(trader.getTraderId()));
+        List<TraderEntity> list=service.getTraderRequest(Integer.valueOf(trader.getTraderId()));
         Map<String ,Object> model=new HashMap<>();
         model.put("code",0);
         model.put("msg","");
@@ -104,7 +104,7 @@ public class TraderRequestController {
     @ResponseBody
     public Map<String, Object> getTraderHistory(HttpSession session){
         Trader trader= (Trader) session.getAttribute("trader");
-        List<TraderRequest> list=service.getTraderRequest(Integer.valueOf(trader.getTraderId()));
+        List<TraderEntity> list=service.getTradeHistory(Integer.valueOf(trader.getTraderId()));
         Map<String ,Object> model=new HashMap<>();
         model.put("code",0);
         model.put("msg","");

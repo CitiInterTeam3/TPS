@@ -1,9 +1,6 @@
 package com.CitiTeam3.TPS.dao;
 
-import com.CitiTeam3.TPS.domain.SalesRequest;
-import com.CitiTeam3.TPS.domain.Status;
-import com.CitiTeam3.TPS.domain.TraderRequest;
-import com.CitiTeam3.TPS.domain.Type;
+import com.CitiTeam3.TPS.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
@@ -56,24 +53,25 @@ public class TraderRequestDao {
         return holder.getKey();
     }
 
-    public List<TraderRequest> getAllRequestByTraderId(int traderId){
+    public List<TraderEntity> getAllRequestByTraderId(int traderId){
         String sql="select * from traderRequest where traderId=? and (status=? or status=?)";
         return jdbc.query(sql, new Object[]{traderId,Status.PENDDING.getValue(),Status.PROCESSED.getValue()}
-        , new RowMapper<TraderRequest>() {
+        , new RowMapper<TraderEntity>() {
             @Override
-            public TraderRequest mapRow(ResultSet rs, int rowNum) throws SQLException {
-                TraderRequest request=new TraderRequest();
-                request.setTraderRequestId(rs.getInt("traderRequestId"));
-                request.setTraderId(rs.getInt("traderId"));
-                request.setPrice(rs.getDouble("price"));
-                request.setAmount(rs.getInt("amount"));
-                request.setType(rs.getInt("type"));
-                request.setStatus(rs.getInt("status"));
-                request.setMatchId(rs.getInt("matchedSalesRequest"));
-                request.setCusipId(rs.getString("cusipId"));
-                request.setIssueDate(rs.getDate("issueDate"));
-                request.setTargetId(rs.getInt("targetSalesId"));
-                return request;
+            public TraderEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
+                TraderEntity traderEntity=new TraderEntity();
+                traderEntity.setTraderRequestId(rs.getInt("traderRequestId"));
+                traderEntity.setTraderId(rs.getInt("traderId"));
+                traderEntity.setPrice(rs.getDouble("price"));
+                traderEntity.setAmount(rs.getInt("amount"));
+                traderEntity.setType(rs.getInt("type"));
+                traderEntity.setStatus(rs.getInt("status"));
+                traderEntity.setMatchId(rs.getInt("matchedSalesRequest"));
+                traderEntity.setCusipId(rs.getString("cusipId"));
+                traderEntity.setIssueDate(rs.getDate("issueDate"));
+                traderEntity.setTargetId(rs.getInt("targetSalesId"));
+                traderEntity.setRejectReason(rs.getString("rejectReason"));
+                return traderEntity;
             }
         });
     }

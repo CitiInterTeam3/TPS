@@ -48,7 +48,7 @@ public class SalesRequestController {
     @ResponseBody
     public Map<String, Object> getSalesHistory(HttpSession session){
         Sales sales= (Sales) session.getAttribute("sales");
-        List<SalerRequest> list=service.getSaleHistory(Integer.valueOf(sales.getSalesId()));
+        List<SaleEntity> list=service.getSaleHistory(Integer.valueOf(sales.getSalesId()));
         Map<String ,Object> model=new HashMap<>();
         model.put("code",0);
         model.put("msg","");
