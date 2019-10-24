@@ -126,6 +126,7 @@ public class TraderRequestController {
             service.matchTwoRequest(traderRequest,salesRequest);
             return "success";
         }catch (DataAccessException e){
+            e.printStackTrace();
             return "failed";
         }
 
