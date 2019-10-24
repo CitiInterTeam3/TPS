@@ -10,7 +10,7 @@ layui.use('table', function(){
     table.render({
         elem: '#test'
         // ,url:'/getMatchedSalesRequest?traderRequestId='+$("[name='traderRequestId']").val()
-        ,url:'/getMatchedSalesRequest?traderRequestId=1'
+        ,url:'/getMatchedSalesRequest?traderRequestId='+$("[name='traderRequestId']").val()
         ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
         ,cellMinWidth:60
         ,title: 'Trades'
@@ -25,6 +25,9 @@ layui.use('table', function(){
             ,{field:'issueDate', title:'date', sort:true}
         ]]
         ,page: true
+        ,text: {
+            none: 'no matched data' //默认：无数据。注：该属性为 layui 2.2.5 开始新增
+        }
     });
 
     //头工具栏事件

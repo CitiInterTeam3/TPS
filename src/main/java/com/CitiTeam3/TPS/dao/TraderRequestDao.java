@@ -16,6 +16,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -56,8 +57,9 @@ public class TraderRequestDao {
     }
 
     public List<TraderRequest> getAllRequestByTraderId(int traderId){
-        String sql="select * from traderRequest where traderId=?";
-        return jdbc.query(sql, new Object[]{traderId}, new RowMapper<TraderRequest>() {
+        String sql="select * from traderRequest where traderId=? and (status=? or status=?)";
+        return jdbc.query(sql, new Object[]{traderId,Status.PENDDING.getValue(),Status.PROCESSED.getValue()}
+        , new RowMapper<TraderRequest>() {
             @Override
             public TraderRequest mapRow(ResultSet rs, int rowNum) throws SQLException {
                 TraderRequest request=new TraderRequest();
@@ -101,6 +103,7 @@ public class TraderRequestDao {
 
     public List<SalesRequest>  getMatchedSalesRequest(int requestId){
         TraderRequest request=getTraderRequestById(requestId);
+        if (request.getStatus()!=Status.PENDDING.getValue())return new ArrayList<>();
         StringBuilder builder=new StringBuilder();
         builder.append(" select * from salesRequest where ")
                 .append(" salesId=? and amount=? and type=? and cusipId=?")
@@ -111,7 +114,7 @@ public class TraderRequestDao {
         args[2]=request.getType()== Type.BUY.getValue()?Type.SALE.getValue():Type.BUY.getValue();
         args[3]=request.getCusipId();
         args[4]=request.getTraderId();
-        args[5]=request.getStatus();
+        args[5]=Status.PENDDING.getValue();
         return jdbc.query(builder.toString(), args, new RowMapper<SalesRequest>() {
             @Override
             public SalesRequest mapRow(ResultSet rs, int rowNum) throws SQLException {

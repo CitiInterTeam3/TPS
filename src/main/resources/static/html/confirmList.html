@@ -16,7 +16,7 @@
 
 <script type="text/html" id="barDemo">
 <!--    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>-->
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">匹配</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">match</a>
 </script>
 
 <!-- Optional JavaScript -->
@@ -51,8 +51,20 @@
                 ,{field:'price', title:'price',sort:true}
                 ,{field:'amount', title:'amount',sort:true}
                 ,{field:'targetId', title:'target id'}
-                ,{field:'status', title:'status',templet: function (d) {return 'Pending';} }
-                ,{field:'type', title:'type' ,templet: function (d){if(d==1) {return 'sale';} else {return 'buy';}}}
+                ,{field:'status', title:'status',templet: function (d) {
+                    console.log(d)
+                    if (d.status==1)
+                    return 'Pending';
+                    else if (d.status==2)return 'processed'
+                    else return 'unrecognized'
+                    }
+                }
+                ,{field:'type', title:'type' ,templet: function (d){
+                        if(d.type==1) {return 'buy';}
+                        else if (d.type==2) {return 'sale';}
+                        else return 'unrecognized'
+                    }
+                }
                 ,{field:'issueDate', title:'date', sort:true}
                 ,{fixed:'right', title:'action', toolbar: '#barDemo'}
             ]]
