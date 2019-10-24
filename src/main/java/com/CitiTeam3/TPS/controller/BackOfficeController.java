@@ -18,6 +18,8 @@ public class BackOfficeController {
     @Autowired
     BackOfficeService service;
 
+
+
     @RequestMapping("getProcessedTransaction")
     @ResponseBody
     public Map<String, Object> getProcessedTransaction(){
@@ -37,15 +39,22 @@ public class BackOfficeController {
 
     @RequestMapping("backOfficeAccept")
     @ResponseBody
-    public String login(HttpServletRequest request){
-//        Trader trader=service.isValid(request.getParameter("userName"),
-//                request.getParameter("psw"));
-//        if (trader!=null){
-//            request.getSession().setAttribute("trader",trader);
-//            return "success";
-//        }
-//        else return "faild";
-        return "hello134243";
+    public String backOfficeAccept(HttpServletRequest request){
+        int rowCount=service.accepted(Integer.valueOf(request.getParameter("traderRequestId")));
+        if(rowCount>0)
+            return "success";
+        else
+            return "fail";
+    }
+
+    @RequestMapping("backOfficeReject")
+    @ResponseBody
+    public String backOfficeReject(HttpServletRequest request){
+        int rowCount=service.rejected(Integer.valueOf(request.getParameter("traderRequestId")),request.getParameter("rejectReason"));
+        if(rowCount>0)
+            return "success";
+        else
+            return "fail";
     }
     
     
