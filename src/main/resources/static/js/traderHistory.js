@@ -24,6 +24,7 @@ layui.use('table', function(){
                 else if (d.type==2) {return 'sale';}
                 else return 'unrecognized'}}
             ,{field:'issueDate', title:'date', sort:true}
+            ,{field: 'rejectReason',title:'Reject Reason'}
         ]]
     });
 });
