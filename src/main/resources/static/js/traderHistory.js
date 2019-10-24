@@ -19,8 +19,12 @@ layui.use('table', function(){
             ,{field:'amount', title:'amount',sort:true}
             ,{field:'targetId', title:'target id'}
             ,{field:'status', title:'status',templet: function (d) {return 'Pending';} }
-            ,{field:'type', title:'type' ,templet: function (d){if(d==1) {return 'sale';} else {return 'buy';}}}
+            ,{field:'type', title:'type' ,templet: function (d){
+                if(d.type==1) {return 'buy';}
+                else if (d.type==2) {return 'sale';}
+                else return 'unrecognized'}}
             ,{field:'issueDate', title:'date', sort:true}
+            ,{field: 'rejectReason',title:'Reject Reason'}
         ]]
     });
 });
