@@ -28,6 +28,7 @@ public class TraderRequestService {
      */
     public boolean addRequest(TraderRequest request){
         Number key=traderRequestDao.addRequest(request);
+        request.setTraderRequestId(key.intValue());
         List<SalesRequest> matchRequest=traderRequestDao.getMatchedSalesRequest(key.intValue());
         for (SalesRequest sq :matchRequest) {
             if (isPriceMatch(sq.getPrice(),request.getPrice())){

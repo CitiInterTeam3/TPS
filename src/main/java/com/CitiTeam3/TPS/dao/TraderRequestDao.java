@@ -46,7 +46,7 @@ public class TraderRequestDao {
                 statement.setObject(5,Status.PENDDING.getValue());
                 statement.setObject(6,request.getCusipId());
                 statement.setObject(7,new Date(System.currentTimeMillis()));
-                statement.setObject(8,request.getTraderId());
+                statement.setObject(8,request.getTargetId());
                 return statement;
             }
         }, holder);
@@ -123,7 +123,7 @@ public class TraderRequestDao {
                 request.setAmount(rs.getInt("amount"));
                 request.setType(rs.getInt("type"));
                 request.setStatus(rs.getInt("status"));
-                request.setMatchId(rs.getInt("mathchedTraderRequest"));
+                request.setMatchId(rs.getInt("matchedTraderRequest"));
                 request.setCusipId(rs.getString("cusipId"));
                 request.setIssueDate(rs.getDate("issueDate"));
                 request.setTargetId(rs.getInt("targetTraderId"));

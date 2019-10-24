@@ -48,11 +48,10 @@ public class SaleController {
     @ResponseBody
     public String login(HttpServletRequest request){
         String username=request.getParameter("userName");
-        Sales trader=service.isValid(request.getParameter("userName"),
+        Sales sales=service.isValid(request.getParameter("userName"),
                 request.getParameter("psw"));
-        if (trader!=null){
-
-            request.getSession().setAttribute("sales",trader);
+        if (sales!=null){
+            request.getSession().setAttribute("sales",sales);
             return "success";
         }
         else return "faild";
