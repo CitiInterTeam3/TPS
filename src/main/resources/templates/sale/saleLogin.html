@@ -78,7 +78,7 @@
 <!--    <link href="signin.css" rel="stylesheet">-->
 </head>
 <body class="text-center">
-<form class="form-signin">
+<form class="form-signin" id="form">
     <img class="mb-4" src="/img/CITI.jpg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Sale Workstation</h1>
     <label for="inputUserName" class="sr-only">UserName</label>
@@ -90,7 +90,7 @@
             <input type="checkbox" value="remember-me"> Remember me
         </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block" id="login" type="button">Sign in</button>
     <p class="mt-5 mb-3 text-muted">&copy;2017-2019</p>
 </form>
 
@@ -107,13 +107,13 @@
 
     $("#login").click(function () {
         $.ajax({
-            url:"checkTrader",
+            url:"loginForSales",
             dataType:"text",
             method:"post",
             data:$('#form').serialize(),
             success:function (data) {
                 if (data=="success"){
-                    $(location).attr('href', 'personalHome');
+                    $(location).attr('href', 'sale/salerPersonalHome');
                 }
                 else {
                     layer.msg("invalid password or user name")

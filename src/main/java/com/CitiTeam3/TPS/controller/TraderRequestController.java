@@ -100,6 +100,19 @@ public class TraderRequestController {
         return model;
     }
 
+    @RequestMapping("/getTraderHistory")
+    @ResponseBody
+    public Map<String, Object> getTraderHistory(HttpSession session){
+        Trader trader= (Trader) session.getAttribute("trader");
+        List<TraderRequest> list=service.getTraderRequest(Integer.valueOf(trader.getTraderId()));
+        Map<String ,Object> model=new HashMap<>();
+        model.put("code",0);
+        model.put("msg","");
+        model.put("count",list.size());
+        model.put("data",list);
+        return model;
+    }
+
     @RequestMapping("matchRequest")
     @ResponseBody
     public String matchRequest(HttpServletRequest request){

@@ -59,6 +59,10 @@ public class LoginController {
         else return "faild";
     }
 
+    @RequestMapping("/getTraderHistoryPage")
+    public String getTraderHistoryPage(Model mv, HttpServletRequest request){
+        return "trader/tradeHistory";
+    }
     @RequestMapping("/personalHome")
     public String personHome(Model model,HttpSession session){
         Object trader=session.getAttribute("trader");
