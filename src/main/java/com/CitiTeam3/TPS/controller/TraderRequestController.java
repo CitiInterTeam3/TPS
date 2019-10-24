@@ -87,7 +87,7 @@ public class TraderRequestController {
         return model;
     }
 
-    @RequestMapping("getTraderHistory")
+    @RequestMapping("/getTraderHistory")
     @ResponseBody
     public Map<String, Object> getTraderHistory(HttpSession session){
         Trader trader= (Trader) session.getAttribute("trader");

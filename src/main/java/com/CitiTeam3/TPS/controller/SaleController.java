@@ -30,10 +30,10 @@ public class SaleController {
     public String SalesInput(Model mv, HttpSession session){
         return "addSaleTrans";
     }
-    @RequestMapping("/")
-    public String saleSignUp(){
-        return "sale/saleLogin";
-    }
+//    @RequestMapping("/")
+//    public String saleSignUp(){
+//        return "sale/saleLogin";
+//    }
     @RequestMapping("/SalerLogin")
     public String salerLogin()
     {
