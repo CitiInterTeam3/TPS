@@ -1,6 +1,7 @@
 
 layui.use('table', function(){
     var table = layui.table;
+    var layer = layui.layer
     //var body = layer.getChildFrame('body', index);
 
     // loadData子页面方法
@@ -36,7 +37,28 @@ layui.use('table', function(){
         switch(obj.event){
             case 'getCheckData':
                 var data = checkStatus.data;  //获取选中行数据
-                layer.alert(JSON.stringify(data));
+                //layer.alert(JSON.stringify(data));
+                //console.log(data)
+                $.ajax({
+                    url:"/matchRequest",
+                    dataType:"text",
+                    method:"post",
+                    data:{
+                        traderRequestId:$("[name='traderRequestId']").val(),
+                        salesRequestId:data[0].salesRequestId
+                    },
+                    success:function (returnData) {
+                        if (returnData=="success"){
+                            layer.msg("add success");
+                        }
+                        else {
+                            layer.msg(returnData)
+                        }
+                    },
+                    error:function () {
+                        $().alert("network failed")
+                    }
+                });
                 break;
         };
     });

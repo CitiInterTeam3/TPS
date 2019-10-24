@@ -2,7 +2,6 @@ package com.CitiTeam3.TPS.dao;
 
 import com.CitiTeam3.TPS.domain.SalesRequest;
 import com.CitiTeam3.TPS.domain.Status;
-import com.CitiTeam3.TPS.domain.TraderRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
